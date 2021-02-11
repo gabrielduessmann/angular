@@ -30,3 +30,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 `npm install --save bootstrap@3 ` -> install localy bootstrap 3
 `npm install` -> install all the dependencies
+`ng generate component nameComponent` -> generate automatically a new component
+`ng g c nameCOmponent` -> also generate automatically a new component
