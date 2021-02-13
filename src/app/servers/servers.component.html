@@ -1,3 +1,9 @@
+<button class="btn btn-primary" [disabled]="!allowNewServer">Add New Server</button>
+
+
+<!-- <p>{{allowNewServer}}</p>  string interpolation -->
+<p [innerText]="allowNewServer"></p> <!--Propery biding -->
+
 <app-server></app-server>
 <app-server></app-server>
 
