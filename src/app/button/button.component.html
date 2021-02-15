@@ -1,0 +1,13 @@
+<br>
+<br>
+
+<button class="btn btn-primary" (click)="toggleColor()">Toggle styling</button>
+
+<p [ngStyle]="{color: color}">Your password is correct!</p> 
+
+<p 
+*ngFor="let click of countClicks; let i = index"
+[ngStyle]="{backgroundColor: stylyLabel(i)}"
+[ngClass]="{ label: i >= 4 }">
+    {{ click }}
+</p>
