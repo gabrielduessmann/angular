@@ -42,4 +42,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
  ## Project Structure
 
- ![alt text](https://github.com/gabrielduessmann/angular/blob/master/src/images/projectStructure.png)
+ ![Structure](https://github.com/gabrielduessmann/angular/blob/master/src/images/projectStructure.png)
