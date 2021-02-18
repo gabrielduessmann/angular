@@ -38,7 +38,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 `ng serve` -> CLI build Angular and dependecies, also run the server
 
-`ng g c FOLDER_NAME --skipTests true` -> generate a new folder with component files
+`ng g c path/FOLDER_NAME --skipTests true` -> generate a new folder with component files
 
 
 
