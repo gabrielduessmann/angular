@@ -34,6 +34,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 `ng generate component nameComponent` -> generate automatically a new component
 
+`ng g c component-name --skipTests=true` -> more efficiently way to generate a new component
+
 `ng g c nameCOmponent` -> also generate automatically a new component
 
 `ng serve` -> CLI build Angular and dependecies, also run the server
