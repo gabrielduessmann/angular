@@ -18,9 +18,7 @@ export class CockpitComponent implements OnInit {
   @ViewChild('serverNameInput') serverNameInput: ElementRef;
   @ViewChild('serverContentInput') serverContentInput: ElementRef;
 
-
-
-  onAddServer() {
+  onAddServer(): void {
     let serverName: string = this.serverNameInput.nativeElement.value;
     let contentName: string = this.serverContentInput.nativeElement.value;
 
@@ -30,7 +28,7 @@ export class CockpitComponent implements OnInit {
     });
   }
 
-  onAddBlueprint() {
+  onAddBlueprint(): void {
     let serverName: string = this.serverNameInput.nativeElement.value;
     let contentName: string = this.serverContentInput.nativeElement.value;
 
