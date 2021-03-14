@@ -6,7 +6,8 @@ import {
   OnChanges,
   OnDestroy,
   ViewChild,
-  ElementRef
+  ElementRef,
+  ContentChild
 } from '@angular/core';
 
 @Component({
@@ -20,6 +21,7 @@ export class ServerElementComponent implements OnInit, OnChanges, OnDestroy {
   @Input('serverElement') element: {type: string, name: string, content: string};
   @Input() name: string;
   @ViewChild('heading') header: ElementRef;
+  @ContentChild('contentParagraph') paragraph: ElementRef;
   
   constructor() { }
 
