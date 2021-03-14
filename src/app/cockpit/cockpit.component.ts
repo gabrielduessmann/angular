@@ -30,7 +30,7 @@ export class CockpitComponent implements OnInit {
     });
   }
 
-  onAddBlueprint(blueprintInput: HTMLInputElement) {
+  onAddBlueprint() {
     let serverName: string = this.serverNameInput.nativeElement.value;
     let contentName: string = this.serverContentInput.nativeElement.value;
 
