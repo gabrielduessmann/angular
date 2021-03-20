@@ -17,14 +17,17 @@ export class GameComponent implements OnInit {
   lastNumber: number = 0;
 
   startGame() {
-    this.interval = setInterval(() => {
-      this.intervalFired.emit(this.lastNumber + 1);
-      this.lastNumber++;
-    }, 1000);
+    if (!this.interval) { // make sure the user can click only once
+      this.interval = setInterval(() => {
+        this.intervalFired.emit(this.lastNumber + 1);
+        this.lastNumber++;
+      }, 1000);
+    }
   }
 
   pauseGame() {
-
+    clearInterval(this.interval);
+    this.interval = null; 
   }
 
 }
