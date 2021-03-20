@@ -5,9 +5,13 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12">
-        <app-odd *ngFor="let oddNumber of oddNumbers" [oddNumber]="oddNumber"></app-odd>
-        <app-even *ngFor="let evenNumber of evenNumbers" [evenNumber]="evenNumber"></app-even>
+    <div class="col-xs-12" *ngFor="let number of numbers">
+        <div *ngIf="number % 2 === 1">
+            <app-odd [oddNumber]="number"></app-odd>
+        </div>
+        <div *ngIf="number % 2 === 0">
+            <app-even [evenNumber]="number"></app-even>
+        </div>
    </div>
 </div>
 
