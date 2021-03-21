@@ -13,21 +13,34 @@ export class GameComponent implements OnInit {
   }
 
   @Output() intervalFired = new EventEmitter<number>();
+  @Output() newNumbersArray = new EventEmitter<number[]>();
   interval;
   lastNumber: number = 0;
+  @Output('allNumbers') numbers: number[] = [];
 
   startGame() {
     if (!this.interval) { // make sure the user can click only once
       this.interval = setInterval(() => {
         this.intervalFired.emit(this.lastNumber + 1);
         this.lastNumber++;
-      }, 1000);
+      }, 500);
     }
   }
 
-  pauseGame() {
+  pauseGame(isClearData: boolean) {
     clearInterval(this.interval);
     this.interval = null; 
+    if (isClearData) {
+      this.clearData();
+    }
   }
 
+  clearData() {
+    this.lastNumber = 0;
+    const newNumbersArray: number[] = []
+    this.newNumbersArray.emit(newNumbersArray);
+  }
+
+
+  
 }

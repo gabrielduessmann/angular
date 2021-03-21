@@ -7,9 +7,14 @@
           </button> 
           
           <button type="button" class="btn btn-primary btn-danger"
-            (click)="pauseGame()">
+            (click)="pauseGame(false)">
             Pause Game
-        </button>  
+          </button>  
+
+          <button type="button" class="btn btn-primary btn-warning"
+            (click)="pauseGame(true)">
+            Clear Data
+          </button>
   
       </div>
     </div>

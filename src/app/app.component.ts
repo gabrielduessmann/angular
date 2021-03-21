@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +7,14 @@ import { Component, Output } from '@angular/core';
 })
 export class AppComponent {
 
-  oddNumbers: number[] = [];
-  evenNumbers: number[] = [];
-
   numbers: number[] = [];
-
 
   onIntervalFired(number: number) {
     this.numbers.push(number);
+  }
+
+  clearData(newNumbersArray: number[]) {
+    this.numbers = newNumbersArray;
   }
 
 }
