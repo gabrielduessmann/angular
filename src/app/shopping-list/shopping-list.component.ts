@@ -19,4 +19,25 @@ export class ShoppingListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  addIngredient(ingredient: Ingredient) {
+    const thereIsNoRepeatedIngredient: number = -1;
+
+    let indexRepeatedIngredient: number = this.isRepeatedIngredient(ingredient.name)
+  
+    if (indexRepeatedIngredient === thereIsNoRepeatedIngredient) {
+      this.ingredients.push(ingredient); 
+    } else {
+      const currentIngredientQuantity: number = this.ingredients[indexRepeatedIngredient].quantity;
+      const newIngredientQuantity: number = +currentIngredientQuantity + +ingredient.quantity;
+      this.ingredients[indexRepeatedIngredient].quantity = newIngredientQuantity;
+    }
+  }
+
+  isRepeatedIngredient(ingredientName: string): number {
+    const indexRepeteadIngredient = this.ingredients.findIndex(ingredient => 
+            ingredient.name.toLocaleLowerCase() === ingredientName.toLocaleLowerCase())
+   
+    return indexRepeteadIngredient;
+  }
 }
