@@ -1,10 +1,18 @@
-<app-header (pageSelected)="selectPage($event)"></app-header>
-
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <app-recipes *ngIf="pageToBeDisplayed==='recipes'"></app-recipes>
-            <app-shopping-list *ngIf="pageToBeDisplayed==='shopping-list'"></app-shopping-list>
-        </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <button
+        class="btn btn-primary"
+        (click)="onlyOdd = !onlyOdd">Only show odd numbers</button>
+      <br><br>
+      <ul class="list-group">
+        <li
+          class="list-group-item">
+        </li>
+      </ul>
+      <ng-template [ngIf]="onlyOdd">
+        <p>Only odd</p>
+      </ng-template>
     </div>
+  </div>
 </div>

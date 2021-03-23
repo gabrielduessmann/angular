@@ -6,11 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  pageToBeDisplayed: string = 'recipes' 
-
-  selectPage(page: string) {
-    this.pageToBeDisplayed = page;
-  }
-
+  numbers = [1, 2, 3, 4, 5];
+  onlyOdd = false;
 }
