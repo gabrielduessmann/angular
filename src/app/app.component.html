@@ -16,7 +16,7 @@
           </li>
         </div>
 
-        <div *ngIf="!onlyOdd">
+        <div *appUnless="onlyOdd">
           <li
           class="list-group-item"
           [ngStyle]="{color: evenNumber % 2 === 0 ? 'green' : 'black'}"
