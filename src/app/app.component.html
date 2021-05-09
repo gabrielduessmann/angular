@@ -29,7 +29,8 @@
       </ul>
       <ng-template [ngIf]="onlyOdd">
         <p appBasicHighlight>Only odd - Basic highlight</p>
-        <p appBetterHighlight>Only odd - Better hightlight</p>
+        <p [appBetterHighlight]="'red'" defaultBackgroundColor="yellow"
+          >Only odd - Better hightlight</p>
       </ng-template>
     </div>
   </div>
