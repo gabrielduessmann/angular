@@ -31,6 +31,14 @@
         <p appBasicHighlight>Only odd - Basic highlight</p>
         <p [appBetterHighlight]="'red'" defaultBackgroundColor="yellow"
           >Only odd - Better hightlight</p>
+          
+        <div [ngSwitch]="value">
+            <p *ngSwitchCase="1">Value is 1</p>
+            <p *ngSwitchCase="10">Value is 10</p>
+            <p *ngSwitchCase="100">Value is 100</p>
+            <p *ngSwitchDefault>Value is Default</p>
+        </div>
+
       </ng-template>
     </div>
   </div>
