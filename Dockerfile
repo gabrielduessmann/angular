@@ -26,8 +26,6 @@ WORKDIR $ANGULAR_APP_PATH
 
 COPY package*.json ./
 
-# RUN npm install
-
 COPY . .
 
 EXPOSE 4210
