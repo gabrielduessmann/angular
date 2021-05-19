@@ -2,6 +2,32 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
 
+
+## Development server with Docker (exec/development)
+
+#### Execution environment
+Uncomment the first lines of `Dockerfile`.
+
+#### Development environment
+Already set up.
+
+### Run
+* Build/create the docker image  
+`docker build -t angular-app-image .`
+* Run docker container
+`docker run -it -p 4210:4210 -v ~/private/angular:/angular-app --name=angular-app-container angular-app-image /bin/bash`  
+Be aware that you might need to change the repository folder after the command `-v`, in my case the project is in the folder `/private/angular`
+* Now you are inside the container, you should get all the necessary dependencies by running  
+`npm install`
+* Everything was set up and you are finally ready to deploy the application as development environment, you just need to run   
+`npm run start:docker`
+* Now you can open the application into your brower by `localhost:4210`
+
+### Re-run the same container
+* `docker start angular-app-container`
+* `docker exec -it angular-app-container /bin/bash`
+* `npm run start:docker`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
