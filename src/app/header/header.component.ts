@@ -1,7 +1,4 @@
-import { Component,
-        EventEmitter,
-        Output 
-} from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
     selector: 'app-header',
@@ -10,9 +7,5 @@ import { Component,
 
 export class HeaderComponent {
 
-    @Output() pageSelected = new EventEmitter<string>();
-
-    selectPage(page: string) {
-        this.pageSelected.emit(page);
-    }
+    
 }
