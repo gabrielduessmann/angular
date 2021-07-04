@@ -7,10 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  pageToBeDisplayed: string = 'recipes' 
-
-  selectPage(page: string) {
-    this.pageToBeDisplayed = page;
-  }
 
 }
