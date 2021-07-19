@@ -9,26 +9,7 @@ export class RecipeService {
 
   recipesChanged = new Subject<Recipe[]>();
     
-    private recipes: Recipe[] = [
-        new Recipe(
-          "Pasta Carbonara", 
-          "Made with egg and cheese", 
-          "https://www.recipetineats.com/wp-content/uploads/2014/06/Pasta1.jpg",
-          [
-            new Ingredient("Egg", 5),
-            new Ingredient("Cheese", 1)
-          ]
-        ),
-        new Recipe(
-          "Pasta Bolognese", 
-          "Made with meat", 
-          "https://www.recipetineats.com/wp-content/uploads/2014/06/Pasta1.jpg",
-          [
-            new Ingredient("Pasta", 5),
-            new Ingredient("Meat", 3)
-          ]
-        )
-    ];
+    private recipes: Recipe[] = [];
 
     constructor(private shoppingService: ShoppingListService) {}
 
@@ -61,6 +42,11 @@ export class RecipeService {
     public deleteRecipe(index: number): void {
       this.recipes.splice(index, 1);
       this.recipesWasChanged();
+    }
+
+    public setRecipes(recipes: Recipe[]): void {
+      this.recipes = recipes;
+      this.recipesChanged.next(this.recipes.slice());
     }
 
 }
