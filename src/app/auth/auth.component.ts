@@ -13,8 +13,9 @@ export class AuthComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  isLogin: boolean = true;
-  isLoading: boolean = false;
+  isLogin: boolean = true
+  isLoading: boolean = false
+  errorMessage: string = null
 
   ngOnInit(): void {
   }
@@ -35,9 +36,11 @@ export class AuthComponent implements OnInit {
       this.authService.signup(email, password).subscribe(
         res => {
           console.log(res)
+          this.isLoading = false
         },
-        err => {
-          console.log(err)
+        errorMessage => {
+         
+          this.errorMessage = errorMessage
           this.isLoading = false
         }
       )

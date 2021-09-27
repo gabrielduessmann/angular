@@ -16,6 +16,9 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/recipe.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './auth/auth.component';
+import { AuthService } from './auth/auth.service';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -30,7 +33,9 @@ import { HttpClientModule } from '@angular/common/http';
     ShoppingEditComponent,
     RecipeStartComponent,
     RecipeEditComponent,
-    DropdownDirective
+    DropdownDirective,
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ShoppingListService, RecipeService], // use both in shopping-list and recipes folder
+  providers: [ShoppingListService, RecipeService, AuthService], // use both in shopping-list and recipes folder
   bootstrap: [AppComponent]
 })
 export class AppModule { }
