@@ -14,6 +14,7 @@ export class AuthComponent implements OnInit {
   ) { }
 
   isLogin: boolean = true;
+  isLoading: boolean = false;
 
   ngOnInit(): void {
   }
@@ -25,6 +26,7 @@ export class AuthComponent implements OnInit {
   onSubmit(form: NgForm) {
     if (!form.valid) return
 
+    this.isLoading = true
     if (this.isLogin) {
 
     } else {
@@ -36,6 +38,7 @@ export class AuthComponent implements OnInit {
         },
         err => {
           console.log(err)
+          this.isLoading = false
         }
       )
     }
