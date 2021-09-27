@@ -4,6 +4,7 @@ import { Recipe } from "../recipes/recipe.model";
 import { RecipeService } from "../recipes/recipe.service";
 import { exhaustMap, map, take, tap } from 'rxjs/operators';
 import { AuthService } from "../auth/auth.service";
+import { Observable } from "rxjs";
 
 @Injectable({providedIn: 'root'}) 
 export class DataStorageService {
@@ -25,27 +26,21 @@ export class DataStorageService {
             });
     }
 
-    public fetchRecipes() {
-        return this.authService.user.pipe(
-            take(1), 
-            exhaustMap(user => {
-                return this.http.get<Recipe[]>(this.recipesUrl,
-                {
-                    params: new HttpParams().set('auth', user.token)
-                }) 
-            }),
-            map(recipes => {
-                return recipes.map(recipe => {
-                    return {
-                        ...recipe, 
-                        ingredients: recipe.ingredients ? recipe.ingredients : [] // return empty array for ingredients if the recipe has no ingredients
-                    } 
+    public fetchRecipes(): Observable<Recipe[]> {
+        return this.http.get<Recipe[]>(this.recipesUrl) 
+            .pipe(
+                map(recipes => {
+                    return recipes.map(recipe => {
+                        return {
+                            ...recipe, 
+                            ingredients: recipe.ingredients ? recipe.ingredients : [] // return empty array for ingredients if the recipe has no ingredients
+                        } 
+                    })
+                }), 
+                tap(recipes => {
+                    this.recipeService.setRecipes(recipes);
                 })
-            }), 
-            tap(recipes => {
-                this.recipeService.setRecipes(recipes);
-            })
-        )
+            )
     }
 
 }
