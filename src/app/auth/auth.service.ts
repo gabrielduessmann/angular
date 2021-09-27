@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from './user.model';
@@ -19,7 +20,10 @@ export class AuthService {
   webApiKey: string = "AIzaSyDSorMMvBaD2bdkTbdIDLvZr1YZvAFfivg";
   user = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+    ) { }
 
   signup(email: string, password: string): Observable<AuthResponseData> {
     return this.http.post<AuthResponseData>(
@@ -85,5 +89,10 @@ export class AuthService {
       expirationDate
     )
     this.user.next(user)
+  }
+
+  logout(): void {
+    this.user.next(null)
+    this.router.navigate(['/auth'])
   }
 }
