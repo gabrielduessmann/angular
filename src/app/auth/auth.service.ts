@@ -1,14 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-interface AuthResponseData {
+export interface AuthResponseData {
   idToken: string,
   email: string,
   refreshToken: string,
   expiresIn: string,
-  localId: string
+  localId: string,
+  registered?: boolean
 }
 
 @Injectable()
@@ -18,7 +19,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  signup(email: string, password: string) {
+  signup(email: string, password: string): Observable<AuthResponseData> {
     return this.http.post<AuthResponseData>(
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + this.webApiKey,
       {
@@ -26,23 +27,41 @@ export class AuthService {
         password: password,
         returnSecureToken: true
       })
-      .pipe(catchError(
-        err => {
-          let formattedErrorMessage: string = "An unkown error occured!"
+      .pipe(catchError(this.handleError))
+  }
 
-          if (err.error && err.error.error) {
-            let errorMessage: string = err.error.error.message
+  login(email: string, password: string): Observable<AuthResponseData> {
+    return this.http.post<AuthResponseData>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.webApiKey,
+      {
+        email: email,
+        password: password,
+        returnSecureToken: true
+      }
+    )
+    .pipe(catchError(this.handleError))
+  }
 
-            switch(errorMessage) {
-              case 'EMAIL_EXISTS':
-                formattedErrorMessage = "This email already exists!"
-                break
-            }
-          }
+  private handleError(errorRes: HttpErrorResponse) {
+    let formattedErrorMessage: string = "An unkown error occured!"
 
-          return throwError(formattedErrorMessage)
-        }
-      ))
+    if (errorRes.error && errorRes.error.error) {
+      let errorMessage: string = errorRes.error.error.message
+
+      switch(errorMessage) {
+        case 'EMAIL_EXISTS':
+          formattedErrorMessage = "The email address is already in use by another account."
+          break
+        case 'EMAIL_NOT_FOUND':
+          formattedErrorMessage = "There is no user record corresponding to this identifier. The user may have been deleted."
+          break
+        case 'INVALID_PASSWORD':
+          formattedErrorMessage = "The password is invalid."
+          break
+      }
+    }
+
+    return throwError(formattedErrorMessage)
   }
 
 }
