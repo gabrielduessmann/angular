@@ -6,8 +6,7 @@ import { AuthResponseData, AuthService } from './auth.service';
 
 @Component({
   selector: 'auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  templateUrl: './auth.component.html'
 })
 export class AuthComponent implements OnInit {
 
@@ -58,6 +57,10 @@ export class AuthComponent implements OnInit {
         this.isLoading = false
       }
     )
+  }
+
+  onHandleError() {
+    this.errorMessage = null;
   }
 
 }
