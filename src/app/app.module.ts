@@ -21,6 +21,7 @@ import { AuthService } from './auth/auth.service';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AlertComponent } from './alert/alert/alert.component';
+import { PlaceholderDirective } from './placeholder/placeholder.directive';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { AlertComponent } from './alert/alert/alert.component';
     DropdownDirective,
     AuthComponent,
     LoadingSpinnerComponent,
-    AlertComponent
+    AlertComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,
@@ -57,6 +59,10 @@ import { AlertComponent } from './alert/alert/alert.component';
       multi: true
     }
   ], 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // component created without selector or router
+  entryComponents: [
+    AlertComponent
+  ]
 })
 export class AppModule { }
