@@ -14,11 +14,14 @@ export interface AuthResponseData {
   registered?: boolean
 }
 
+const USER_DATA_STORAGE = "userData"
+
 @Injectable()
 export class AuthService {
 
-  webApiKey: string = "AIzaSyDSorMMvBaD2bdkTbdIDLvZr1YZvAFfivg";
-  user = new BehaviorSubject<User>(null);
+  webApiKey: string = "AIzaSyDSorMMvBaD2bdkTbdIDLvZr1YZvAFfivg"
+  user = new BehaviorSubject<User>(null)
+  private tokenExpirationTimer: any
 
   constructor(
     private http: HttpClient,
@@ -89,21 +92,27 @@ export class AuthService {
       expirationDate
     )
     this.user.next(user)
+    this.autoLogout(expiresIn * 1000)
     localStorage.setItem('userData', JSON.stringify(user))
   }
 
   logout(): void {
     this.user.next(null)
     this.router.navigate(['/auth'])
+    localStorage.removeItem(USER_DATA_STORAGE)
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer)
+    }
+    this.tokenExpirationTimer = null
   }
 
-  autoLogin() {
+  autoLogin(): void {
     const userData: {
       email: string,
       id: string,
       _token: string,
       _tokenExpirationDate: string
-    } = JSON.parse(localStorage.getItem('userData'))
+    } = JSON.parse(localStorage.getItem(USER_DATA_STORAGE))
     if (!userData) {
       return
     } 
@@ -112,6 +121,15 @@ export class AuthService {
 
     if (loadedUser.token) {
       this.user.next(loadedUser)
+      const durationTimeToExpire: number = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime()
+      this.autoLogout(durationTimeToExpire)
     }
   }
+
+autoLogout(expirationDuration: number): void {
+  this.tokenExpirationTimer = setTimeout(() => {
+    this.logout()
+  }, expirationDuration)
+}
+
 }
